@@ -5,4 +5,37 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  background-image: url("./image/31163-9-razer-logo-transparent-background.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-position: 20%;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: -5rem;
+  width: 30;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+.container {
+  margin-top: 5rem;
+}
+
+figure {
+  height: 250px;
+}
+
+figure img {
+  height: 80%;
 }
