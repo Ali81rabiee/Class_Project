@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   oneProductFailed,
   oneProductLoading,
@@ -34,6 +35,16 @@ export const oneProduct = (
     case oneProductFailed:
       return payload;
     case oneProductSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+export const productItem = (state = 0, { type, payload }) => {
+  switch (type) {
+    case "add product item to cart":
       return payload;
 
     default:

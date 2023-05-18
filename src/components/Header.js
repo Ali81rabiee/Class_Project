@@ -1,8 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
+import "./Header.css";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const productItem = useSelector((state) => state.productItem);
+
   const navigat = useNavigate();
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
@@ -30,7 +34,7 @@ const Header = () => {
                 />
               </svg>
               <span className="badge badge-lg indicator-item color border-none">
-                0
+                {productItem}
               </span>
             </div>
             {/* </Link> */}

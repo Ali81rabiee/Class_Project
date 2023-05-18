@@ -3,6 +3,7 @@ import logo from "../image/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneProduct } from "../redux/action";
 import { useNavigate, useParams } from "react-router-dom";
+import "./Product.css";
 
 const Product = () => {
   const navigat = useNavigate();

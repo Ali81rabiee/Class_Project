@@ -8,30 +8,6 @@ body {
   /* height: 850vh; */
 }
 
-.card {
-  margin-bottom: -5rem;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  z-index: 2;
-  /* background-color: black; */
-  color: #7ac142;
-}
-
-.container {
-  margin-top: 5rem;
-}
-
-figure {
-  height: 250px;
-}
-
-figure img {
-  height: 80%;
-}
-
 .color {
   background-color: #7ac142;
 }
@@ -39,9 +15,4 @@ figure img {
 .color:hover {
   background-color: #000000;
   /* color: black; */
-}
-
-.hero-content img {
-  height: 30rem;
-  width: 40rem;
 }

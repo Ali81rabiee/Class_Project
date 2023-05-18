@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../redux/action";
+import { getProductItem, getProducts } from "../redux/action";
 import { Link, useNavigate } from "react-router-dom";
+import "./Home.css";
 
 const Home = () => {
   const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
   const dispatch = useDispatch();
+
+  const productItem = useSelector((state) => state.productItem);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -44,7 +47,7 @@ const Home = () => {
               <div className="card-actions justify-end">
                 <button
                   className="btn absolute bottom-7 right-5 color border-none"
-                  onClick={() => navigat("/cart")}>
+                  onClick={() => dispatch(getProductItem(1))}>
                   Add to Cart
                 </button>
               </div>

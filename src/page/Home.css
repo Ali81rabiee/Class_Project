@@ -1,0 +1,15 @@
+.container {
+  margin-top: 5rem;
+}
+
+.card {
+  margin-bottom: -5rem;
+}
+
+figure {
+  height: 250px;
+}
+
+figure img {
+  height: 80%;
+}

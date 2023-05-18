@@ -52,3 +52,10 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
     console.log(error);
   }
 };
+
+export const getProductItem = (step) => (dispatch, getState) => {
+  dispatch({
+    type: "add product item to cart",
+    payload: getState().productItem + step,
+  });
+};
