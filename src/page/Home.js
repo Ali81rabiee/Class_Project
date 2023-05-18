@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/action";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -13,24 +15,37 @@ const Home = () => {
   return (
     <div className="container grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
       {data.map((item) => (
-        <div className="card w-auto mt-28 mx-5 glass">
-          <figure className="bg-white">
-            <img src={item.image} alt="car!" />
-
-            {/* {item.category === "Keyboard" ? (
-              <img src={item.image} alt="car!" height={"300rem"} />
-            ) : (
-              <img src={item.image} alt="car!" width={"100rem"} />
-            )} */}
+        <div
+          className="card w-auto mt-28 mx-5 glass border-none"
+          key={item._id}>
+          <figure
+            className="bg-white border-none"
+            onClick={() => navigat(item._id.toString())}>
+            <img src={item.image} alt="car!" className="border-none" />
           </figure>
-          <div className="card-body">
-            <h2 className="card-title block text-center">{item.name}</h2>
-            {/* <span>{item.countInStock}</span> */}
-            <span>{item.price} $</span>
-            <span>rating: {item.rating}</span>
-            <span>{item.category}</span>
+          <div className="card-body h-72 border-none">
+            <h2
+              className="card-title block text-center"
+              onClick={() => navigat(item._id.toString())}>
+              {item.name}
+            </h2>
+            <span
+              onClick={() => navigat(item._id.toString())}
+              className="badge badge-lg indicator-item rounded-full text-2xl font-bold w-12 h-12 absolute -top-5 -right-5 color border-none">
+              {item.countInStock}
+            </span>
+            <span onClick={() => navigat(item._id.toString())}>
+              {item.price} $
+            </span>
+            <span onClick={() => navigat(item._id.toString())}>
+              rating: {item.rating}
+            </span>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Add to Cart</button>
+              <button
+                className="btn absolute bottom-7 right-5 color border-none"
+                onClick={() => navigat("/cart")}>
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
