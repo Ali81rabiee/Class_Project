@@ -8,11 +8,13 @@ body {
   /* height: 850vh; */
 }
 
-.color {
+.bg-color {
   background-color: #7ac142;
 }
-
-.color:hover {
+.text-color {
+  color: #000000;
+}
+.bg-color:hover {
   background-color: #000000;
   /* color: black; */
 }

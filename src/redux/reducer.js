@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  addToCard,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
@@ -7,6 +8,8 @@ import {
   productsLoading,
   productsSuccess,
 } from "./constant";
+
+// create state for products
 
 export const products = (
   state = { data: [], loading: false, error: "" },
@@ -25,6 +28,8 @@ export const products = (
   }
 };
 
+// create state for one product
+
 export const oneProduct = (
   state = { data: [], loading: false, error: "" },
   { type, payload },
@@ -42,12 +47,26 @@ export const oneProduct = (
   }
 };
 
-export const productItem = (state = 0, { type, payload }) => {
+// create state for card items
+
+export const addCartItems = (state = [], { type, payload }) => {
   switch (type) {
-    case "add product item to cart":
+    case addToCard:
+      return state;
+
+    default:
+      break;
+  }
+  return state;
+};
+
+export const PI = (state = 0, { type, payload }) => {
+  switch (type) {
+    case "plus item":
       return payload;
 
     default:
       return state;
   }
 };
+

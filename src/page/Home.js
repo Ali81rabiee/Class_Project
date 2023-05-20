@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductItem, getProducts } from "../redux/action";
-import { Link, useNavigate } from "react-router-dom";
+import { addPI, addToCart, getProducts } from "../redux/action";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
   const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
+  const PI = useSelector((state) => state.PI);
 
-  const productItem = useSelector((state) => state.productItem);
+  const cartItem = useSelector((state) => state.addCartItems);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts());
@@ -35,7 +37,7 @@ const Home = () => {
               </h2>
               <span
                 onClick={() => navigat(item._id.toString())}
-                className="badge badge-lg indicator-item rounded-full text-2xl font-bold w-12 h-12 absolute -top-5 -right-5 color border-none">
+                className="badge badge-lg indicator-item rounded-full text-2xl font-bold w-12 h-12 absolute -top-5 -right-5 bg-color border-none">
                 {item.countInStock}
               </span>
               <span onClick={() => navigat(item._id.toString())}>
@@ -46,8 +48,10 @@ const Home = () => {
               </span>
               <div className="card-actions justify-end">
                 <button
-                  className="btn absolute bottom-7 right-5 color border-none"
-                  onClick={() => dispatch(getProductItem(1))}>
+                  className="btn absolute bottom-7 right-5 bg-color border-none"
+                  onClick={() => addPI(dispatch, PI, 1)}
+                  // onClick={() => addToCart(dispatch, cartItem, item)}
+                  onClickCapture={() => addToCart(dispatch, cartItem, item)}>
                   Add to Cart
                 </button>
               </div>

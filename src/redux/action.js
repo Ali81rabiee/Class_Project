@@ -8,6 +8,8 @@ import {
   productsSuccess,
 } from "./constant";
 
+// req for products
+
 export const getProducts = () => async (dispatch, getState) => {
   try {
     dispatch({
@@ -28,6 +30,8 @@ export const getProducts = () => async (dispatch, getState) => {
     });
   }
 };
+
+// req for one product
 
 export const getOneProduct = (_id) => async (dispatch, getState) => {
   try {
@@ -53,9 +57,12 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
   }
 };
 
-export const getProductItem = (step) => (dispatch, getState) => {
-  dispatch({
-    type: "add product item to cart",
-    payload: getState().productItem + step,
-  });
+// action for card items
+
+export const addToCart = (dispatch, cartItem, item) => {
+  dispatch({ type: "add Item To Card", payload: cartItem.push(item) });
+};
+
+export const addPI = (dispatch, productItem, step) => {
+  dispatch({ type: "plus item", payload: productItem + step });
 };
