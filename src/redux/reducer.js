@@ -70,3 +70,16 @@ export const PI = (state = 0, { type, payload }) => {
   }
 };
 
+export const mines = (state = 0, { type, payload }) => {
+  switch (type) {
+    case "mines item":
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// export const cartData = (state=[],{type,payload})=>{
+
+// }

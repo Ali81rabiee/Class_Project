@@ -7,24 +7,14 @@ import Profile from "./page/Profile";
 import Cart from "./page/Cart";
 import Product from "./page/Product";
 
-const Router = ({ cartItems, setCartItems }) => {
+const Router = () => {
   return (
     <Routes>
-      <Route
-        path="/"
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        element={<Home />}
-      />
+      <Route path="/" element={<Home />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/profile" element={<Profile />} />
-      <Route
-        path="/cart"
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        element={<Cart />}
-      />
+      <Route path="/cart" element={<Cart />} />
       <Route path="/:_id" element={<Product />} />
     </Routes>
   );

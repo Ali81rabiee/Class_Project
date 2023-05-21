@@ -1,81 +1,26 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addPI } from "../redux/action";
+import React, { useContext } from "react";
+import { cartContext } from "../context/CartContext";
+import CartItems from "../components/CartItems";
 
 const Cart = () => {
-  const cartItem = useSelector((state) => state.addCartItems);
-  const PI = useSelector((state) => state.PI);
-  // const productIncrease = useSelector((state) => state.productIncrease);
-
-  const [productIncrease, setProductIncrease] = useState(0);
-
-  const dispatch = useDispatch();
-
-  console.log(cartItem);
-
+  const { getItems, lengthOfItems, getTotalPrice, addItem, removeItem } =
+    useContext(cartContext);
   return (
-    <div className="container px-10 pb-10">
-      <div className="mt-28 grid grid-cols-6 justify-items-center content-center ml-auto px-4 py-8 rounded-2xl bg-slate-300">
-        <h1 className=" font-bold my-auto">IMAGE</h1>
-        <h1 className=" font-bold my-auto">NAME</h1>
-        <p className=" font-bold my-auto">PRICE</p>
-        <p className=" font-bold my-auto">COUNT</p>
-        <p className=" font-bold my-auto">TOTAL</p>
-        <p className=" font-bold my-auto">REMOVE</p>
+    <div className="container pb-10 px-3">
+      <div className="mt-28 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl bg-slate-300">
+        <h1 className="my-auto">IMAGE</h1>
+        <h1 className="my-auto">NAME</h1>
+        <p className="my-auto">PRICE</p>
+        <p className="my-auto">COUNT</p>
       </div>
-      {cartItem.length > 0 ? (
-        cartItem.map((item, index) => (
-          <div
+      {lengthOfItems > 0 ? (
+        getItems().map((item) => (
+          <CartItems
             key={item._id}
-            className="mt-5 grid grid-cols-6 justify-items-center content-center ml-auto px-4 py-8 rounded-2xl bg-slate-300">
-            <div className="h-40">
-              <img src={item.image} className="h-5/6" />
-            </div>
-            <h1 className=" text-center font-bold my-auto">{item.name}</h1>
-            <p className=" font-bold my-auto">{item.price}$</p>
-            <div className="flex w-100">
-              <button
-                className="btn border-none mx-2 bg-color my-auto"
-                onClick={() => {
-                  if (productIncrease > 1) {
-                    setProductIncrease((l) => l - 1);
-                  }
-                }}>
-                -
-              </button>
-              <p className=" font-bold my-auto">{productIncrease}</p>
-              <button
-                className="btn border-none mx-2 bg-color my-auto"
-                onClick={() => {
-                  if (item.countInStock > productIncrease) {
-                    setProductIncrease((l) => l + 1);
-                  }
-                }}>
-                +
-              </button>
-            </div>
-            <p className=" font-bold my-auto">$</p>
-            <button
-              className="btn btn-square btn-error mx-2 my-auto"
-              onClick={() => addPI(dispatch, PI, 1)}
-              onClickCapture={() => {
-                cartItem.splice(index, 1);
-              }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
+            {...item}
+            addItem={addItem}
+            removeItem={removeItem}
+          />
         ))
       ) : (
         <div className="font-bold my-auto text-color text-center p-32">
@@ -96,8 +41,8 @@ const Cart = () => {
           </div>
         </div>
       )}
-      <h2 className=" font-bold my-auto text-color text-center mt-3">
-        TOTAL : 0$
+      <h2 className="font-bold my-auto text-color text-center mt-3">
+        {`TOTAL : ${getTotalPrice()}$`}
       </h2>
     </div>
   );

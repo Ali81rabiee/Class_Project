@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import logo from "../image/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneProduct } from "../redux/action";
+import { addCart, addPI, getOneProduct } from "../redux/action";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Product.css";
 
@@ -9,6 +9,11 @@ const Product = () => {
   const navigat = useNavigate();
   const { _id } = useParams();
   const { data, loading, error } = useSelector((state) => state.oneProduct);
+
+  const PI = useSelector((state) => state.PI);
+
+  const itemCart = useSelector((state) => state.addCartItems);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,7 +49,8 @@ const Product = () => {
             </p>
             <button
               className="btn w-full color border-none"
-              onClick={() => navigat("/cart")}>
+              onClick={() => addPI(dispatch, PI, 1)}
+              onClickCapture={() => addCart(dispatch, itemCart, data)}>
               Buy now
             </button>
           </div>

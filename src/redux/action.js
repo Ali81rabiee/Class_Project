@@ -7,6 +7,7 @@ import {
   productsLoading,
   productsSuccess,
 } from "./constant";
+import { products } from "./reducer";
 
 // req for products
 
@@ -59,10 +60,15 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
 
 // action for card items
 
-export const addToCart = (dispatch, cartItem, item) => {
-  dispatch({ type: "add Item To Card", payload: cartItem.push(item) });
+export const addCart = (itemCart, item) => (dispatch, getState) => {
+  dispatch({ type: "add Item To Card", payload: [...itemCart, item] });
+  const localItems = JSON.parse(localStorage.getItem("cartData")) || [];
+  localStorage.setItem("cartData", JSON.stringify([...localItems, item]));
 };
 
 export const addPI = (dispatch, productItem, step) => {
+  dispatch({ type: "plus item", payload: productItem + step });
+};
+export const addmines = (dispatch, productItem, step) => {
   dispatch({ type: "plus item", payload: productItem + step });
 };
