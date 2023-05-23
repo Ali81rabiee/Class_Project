@@ -7,7 +7,6 @@ import {
   productsLoading,
   productsSuccess,
 } from "./constant";
-import { products } from "./reducer";
 
 // req for products
 
@@ -23,12 +22,12 @@ export const getProducts = () => async (dispatch, getState) => {
       type: productsSuccess,
       payload: { data: [...data], loading: false, error: "" },
     });
-    console.log(data);
   } catch (error) {
     dispatch({
       type: productsFailed,
       payload: { data: [], loading: false, error: error.message },
     });
+    console.log(error);
   }
 };
 
@@ -44,7 +43,6 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
     const { data } = await axios.get(
       `http://kzico.runflare.run/product/${_id}`,
     );
-    console.log(data);
     dispatch({
       type: oneProductSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
@@ -58,17 +56,39 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
   }
 };
 
-// action for card items
+// action for sing up
 
-export const addCart = (itemCart, item) => (dispatch, getState) => {
-  dispatch({ type: "add Item To Card", payload: [...itemCart, item] });
-  const localItems = JSON.parse(localStorage.getItem("cartData")) || [];
-  localStorage.setItem("cartData", JSON.stringify([...localItems, item]));
-};
+export const getsingUp =
+  (username, email, password, mobile) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: oneProductLoading,
+        payload: { data: [], loading: true, error: "" },
+      });
 
-export const addPI = (dispatch, productItem, step) => {
-  dispatch({ type: "plus item", payload: productItem + step });
-};
-export const addmines = (dispatch, productItem, step) => {
-  dispatch({ type: "plus item", payload: productItem + step });
-};
+      const { data } = await axios.post(
+        "http://kzico.runflare.run/user/signup",
+        {
+          username: `${username}`,
+          email: `${email}`,
+          password: `${password}`,
+          mobile: `${mobile}`,
+        },
+      );
+      dispatch({
+        type: oneProductSuccess,
+        payload: { data: { ...data }, loading: false, error: "" },
+      });
+      console.log(data);
+    } catch (error) {
+      dispatch({
+        type: oneProductFailed,
+        payload: {
+          data: [],
+          loading: false,
+          error: error,
+        },
+      });
+      console.log(error.response.data.message);
+    }
+  };

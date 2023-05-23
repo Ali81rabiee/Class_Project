@@ -6,5 +6,7 @@ export const productsSuccess = "success";
 export const oneProductLoading = "loading";
 export const oneProductFailed = "failed";
 export const oneProductSuccess = "success";
-// type for card items
-export const addToCard = "add Item To Card";
+// type for sing up
+export const singUpLoading = "loading";
+export const singUpFailed = "failed";
+export const singUpSuccess = "success";

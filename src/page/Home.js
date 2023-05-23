@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, addPI, getProducts } from "../redux/action";
+import { getProducts } from "../redux/action";
 import { cartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
@@ -8,8 +8,7 @@ import "./Home.css";
 const Home = () => {
   const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
-  // const PI = useSelector((state) => state.PI);
-  // const itemCart = useSelector((state) => state.addCartItems);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
@@ -48,8 +47,6 @@ const Home = () => {
               <div className="card-actions justify-end">
                 <button
                   className="btn absolute bottom-7 right-5 bg-color border-none"
-                  // onClick={() => addPI(dispatch, PI, 1)}
-                  // onClickCapture={() => dispatch(addCart(itemCart, item))}
                   onClick={() => addItem(item._id)}>
                   Add to Cart
                 </button>

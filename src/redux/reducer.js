@@ -1,12 +1,13 @@
-import { useState } from "react";
 import {
-  addToCard,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
   productsFailed,
   productsLoading,
   productsSuccess,
+  singUpFailed,
+  singUpLoading,
+  singUpSuccess,
 } from "./constant";
 
 // create state for products
@@ -47,39 +48,21 @@ export const oneProduct = (
   }
 };
 
-// create state for card items
+// sing up
 
-export const addCartItems = (state = [], { type, payload }) => {
+export const singUp = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
   switch (type) {
-    case addToCard:
-      return state;
-
-    default:
-      break;
-  }
-  return state;
-};
-
-export const PI = (state = 0, { type, payload }) => {
-  switch (type) {
-    case "plus item":
+    case singUpLoading:
+      return payload;
+    case singUpFailed:
+      return payload;
+    case singUpSuccess:
       return payload;
 
     default:
       return state;
   }
 };
-
-export const mines = (state = 0, { type, payload }) => {
-  switch (type) {
-    case "mines item":
-      return payload;
-
-    default:
-      return state;
-  }
-};
-
-// export const cartData = (state=[],{type,payload})=>{
-
-// }

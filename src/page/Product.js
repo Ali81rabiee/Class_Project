@@ -1,21 +1,13 @@
 import React, { useEffect } from "react";
-import logo from "../image/logo.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, addPI, getOneProduct } from "../redux/action";
-import { useNavigate, useParams } from "react-router-dom";
+import { getOneProduct } from "../redux/action";
+import { useParams } from "react-router-dom";
 import "./Product.css";
 
 const Product = () => {
-  const navigat = useNavigate();
   const { _id } = useParams();
   const { data, loading, error } = useSelector((state) => state.oneProduct);
-
-  const PI = useSelector((state) => state.PI);
-
-  const itemCart = useSelector((state) => state.addCartItems);
-
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getOneProduct(_id));
   }, []);
@@ -47,12 +39,6 @@ const Product = () => {
               <span>price:</span>
               <span>{data.price}$</span>
             </p>
-            <button
-              className="btn w-full color border-none"
-              onClick={() => addPI(dispatch, PI, 1)}
-              onClickCapture={() => addCart(dispatch, itemCart, data)}>
-              Buy now
-            </button>
           </div>
         </div>
       </div>

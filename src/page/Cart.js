@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { cartContext } from "../context/CartContext";
 import CartItems from "../components/CartItems";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  const navigat = useNavigate();
+
   const { getItems, lengthOfItems, getTotalPrice, addItem, removeItem } =
     useContext(cartContext);
   return (
@@ -44,6 +47,19 @@ const Cart = () => {
       <h2 className="font-bold my-auto text-color text-center mt-3">
         {`TOTAL : ${getTotalPrice()}$`}
       </h2>
+      {lengthOfItems > 0 ? (
+        <button
+          className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"
+          onClick={() => navigat("/login")}>
+          next
+        </button>
+      ) : (
+        <button
+          className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"
+          disabled>
+          next
+        </button>
+      )}
     </div>
   );
 };

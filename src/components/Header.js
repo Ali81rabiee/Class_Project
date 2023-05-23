@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 import { cartContext } from "../context/CartContext";
 
 const Header = () => {
-  // const PI = useSelector((state) => state.PI);
-  // const PX = useSelector((state) => state.mines);
   const cart = JSON.parse(localStorage.getItem("cartData")) || [];
   const navigat = useNavigate();
   const { lengthOfItems } = useContext(cartContext);
@@ -45,11 +43,11 @@ const Header = () => {
             tabIndex={0}
             className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
             style={{ width: "4rem", height: "4rem" }}>
-            <div>
+            <div onClick={() => navigat("/login")}>
               <span className="mt-3 block text-lg">log In</span>
             </div>
           </label>
-          <ul
+          {/* <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             <li onClick={() => navigat("/profile")}>Profile</li>
@@ -57,7 +55,7 @@ const Header = () => {
             <li onClick={() => navigat("/settings")}>Settings</li>
 
             <li onClick={() => navigat("/logout")}>Logout</li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>
