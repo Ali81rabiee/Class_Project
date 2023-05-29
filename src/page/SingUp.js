@@ -16,7 +16,6 @@ const SingUp = () => {
   const [password, setPassword] = useState({ value: "", isTouched: false });
   const [confirm_password, setConfirm_password] = useState("");
   const [mobile, setMobile] = useState({ value: "", isTouched: false });
-
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
   const mobileRegex =
@@ -32,7 +31,7 @@ const SingUp = () => {
                   WELCOM TO
                   <span style={{ color: "#7ac142" }}>R E Z E R</span>
                 </h2>
-                <div className="badge badge-error gap-2 mt-2 mx-auto">
+                <div className="badge badge-error gap-2 mt-2 mx-auto h-auto">
                   {error.response.data.message[0]}
                 </div>
                 <div className="form-control">
@@ -212,8 +211,8 @@ const SingUp = () => {
                   WELCOM TO
                   <span style={{ color: "#7ac142" }}>R E Z E R</span>
                 </h2>
-                <div className="badge-lg badge-success gap-2">
-                  {data.message} plesa go to login
+                <div className="badge-lg badge-success gap-2 h-auto">
+                  {data.message}
                 </div>
                 <div className="form-control">
                   <label className="label">

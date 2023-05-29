@@ -3,13 +3,15 @@ import {
   combineReducers,
   applyMiddleware,
 } from "redux";
-import { products, oneProduct, singUp } from "./reducer";
+import { products, oneProduct, singUp, login, profile } from "./reducer";
 import thunk from "redux-thunk";
 
 const reducers = combineReducers({
   products,
   oneProduct,
   singUp,
+  login,
+  profile,
 });
 const middleWare = [thunk];
 const initialState = {};

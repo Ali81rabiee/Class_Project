@@ -1,14 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import "./Header.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartContext } from "../context/CartContext";
+import { getprofile } from "../redux/action";
 
 const Header = () => {
   const cart = JSON.parse(localStorage.getItem("cartData")) || [];
   const navigat = useNavigate();
+  const dispatch = useDispatch();
   const { lengthOfItems } = useContext(cartContext);
+  // useEffect(() => {
+  //   dispatch(getprofile());
+  // }, []);
+  const { data, loading, error } = useSelector((state) => state.profile);
+  // const { dataLogin, loadingLogin, errorLogin } = useSelector(
+  //   (state) => state.login,
+  // );
 
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
@@ -39,23 +48,40 @@ const Header = () => {
           </label>
         </div>
         <div className="dropdown dropdown-end w-1/2">
-          <label
-            tabIndex={0}
-            className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
-            style={{ width: "4rem", height: "4rem" }}>
-            <div onClick={() => navigat("/login")}>
-              <span className="mt-3 block text-lg">log In</span>
-            </div>
-          </label>
-          {/* <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-            <li onClick={() => navigat("/profile")}>Profile</li>
+          {data.success ? (
+            <>
+              <label
+                tabIndex={0}
+                className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
+                style={{ width: "4rem", height: "4rem" }}>
+                <div>
+                  <div className="avatar">
+                    <div className="w-12">
+                      <img src={data.user.image} />
+                    </div>
+                  </div>
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <li onClick={() => navigat("/profile")}>Profile</li>
 
-            <li onClick={() => navigat("/settings")}>Settings</li>
+                <li onClick={() => navigat("/settings")}>Settings</li>
 
-            <li onClick={() => navigat("/logout")}>Logout</li>
-          </ul> */}
+                <li onClick={() => navigat("/logout")}>Logout</li>
+              </ul>
+            </>
+          ) : (
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
+              style={{ width: "4rem", height: "4rem" }}>
+              <div onClick={() => navigat("/login")}>
+                <span className="mt-3 block text-lg">log In</span>
+              </div>
+            </label>
+          )}
         </div>
       </div>
     </div>

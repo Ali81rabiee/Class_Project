@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../redux/action";
+import { getProducts, getprofile } from "../redux/action";
 import { cartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
@@ -8,11 +8,15 @@ import "./Home.css";
 const Home = () => {
   const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
-
+  // const { dataProfile, loadingProfile, errorProfile } = useSelector(
+  //   (state) => state.profile,
+  // );
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+
   const { addItem } = useContext(cartContext);
 
   return (

@@ -1,11 +1,20 @@
 import axios from "axios";
 import {
+  loginFailed,
+  loginLoading,
+  loginSuccess,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
+  proFailed,
+  proLoading,
+  proSuccess,
   productsFailed,
   productsLoading,
   productsSuccess,
+  singUpFailed,
+  singUpLoading,
+  singUpSuccess,
 } from "./constant";
 
 // req for products
@@ -62,7 +71,7 @@ export const getsingUp =
   (username, email, password, mobile) => async (dispatch, getState) => {
     try {
       dispatch({
-        type: oneProductLoading,
+        type: singUpLoading,
         payload: { data: [], loading: true, error: "" },
       });
 
@@ -76,13 +85,13 @@ export const getsingUp =
         },
       );
       dispatch({
-        type: oneProductSuccess,
+        type: singUpSuccess,
         payload: { data: { ...data }, loading: false, error: "" },
       });
       console.log(data);
     } catch (error) {
       dispatch({
-        type: oneProductFailed,
+        type: singUpFailed,
         payload: {
           data: [],
           loading: false,
@@ -92,3 +101,68 @@ export const getsingUp =
       console.log(error.response.data.message);
     }
   };
+
+// action for login
+
+export const getLogin = (user, pass) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: loginLoading,
+      payload: { data: [], loading: true, error: "" },
+    });
+
+    const { data } = await axios.post("http://kzico.runflare.run/user/login", {
+      email: `${user}`,
+      password: `${pass}`,
+    });
+    dispatch({
+      type: loginSuccess,
+      payload: { data: { ...data }, loading: false, error: "" },
+    });
+    localStorage.setItem("userToken", data.user.token);
+    console.log(data);
+  } catch (error) {
+    dispatch({
+      type: loginFailed,
+      payload: {
+        data: [],
+        loading: false,
+        error: error,
+      },
+    });
+    console.log(error.response.data.message);
+  }
+};
+
+// action for profile
+
+export const getprofile = () => async (dispatch, getState) => {
+  const token = localStorage.getItem("userToken");
+  try {
+    dispatch({
+      type: proLoading,
+      payload: { data: [], loading: true, error: "" },
+    });
+
+    const { data } = await axios.get("http://kzico.runflare.run/user/profile", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: proSuccess,
+      payload: { data: { ...data }, loading: false, error: "" },
+    });
+    console.log(data);
+  } catch (error) {
+    dispatch({
+      type: proFailed,
+      payload: {
+        data: [],
+        loading: false,
+        error: error,
+      },
+    });
+    console.log(error.response.data.message);
+  }
+};

@@ -1,7 +1,13 @@
 import {
+  loginFailed,
+  loginLoading,
+  loginSuccess,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
+  proFailed,
+  proLoading,
+  proSuccess,
   productsFailed,
   productsLoading,
   productsSuccess,
@@ -60,6 +66,44 @@ export const singUp = (
     case singUpFailed:
       return payload;
     case singUpSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// login
+
+export const login = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case loginLoading:
+      return payload;
+    case loginFailed:
+      return payload;
+    case loginSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// profile
+
+export const profile = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case proLoading:
+      return payload;
+    case proFailed:
+      return payload;
+    case proSuccess:
       return payload;
 
     default:
