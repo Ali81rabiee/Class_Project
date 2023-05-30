@@ -8,6 +8,7 @@ import Cart from "./page/Cart";
 import Product from "./page/Product";
 import Login from "./page/Login";
 import SingUp from "./page/SingUp";
+import Address from "./page/Address";
 import NotFound from "./components/NotFound";
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
       <Route path="/sing-up" element={<SingUp />} />
       <Route path="/product/:_id" exact element={<Product />} />
       <Route path="/not-found" element={<NotFound />} />
+      <Route path="/address" element={<Address />} />
       <Route path="*" element={<Navigate to="/not-found" />} />
     </Routes>
   );
