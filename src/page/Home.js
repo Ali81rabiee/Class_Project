@@ -28,24 +28,24 @@ const Home = () => {
             key={item._id}>
             <figure
               className="bg-white border-none"
-              onClick={() => navigat(item._id.toString())}>
+              onClick={() => navigat(`/product/${item._id.toString()}`)}>
               <img src={item.image} alt="car!" className="border-none" />
             </figure>
             <div className="card-body h-72 border-none">
               <h2
                 className="card-title block text-center"
-                onClick={() => navigat(item._id.toString())}>
+                onClick={() => navigat(`/product/${item._id.toString()}`)}>
                 {item.name}
               </h2>
               <span
-                onClick={() => navigat(item._id.toString())}
+                onClick={() => navigat(`/product/${item._id.toString()}`)}
                 className="badge badge-lg indicator-item rounded-full text-2xl font-bold w-12 h-12 absolute -top-5 -right-5 bg-color border-none">
                 {item.countInStock}
               </span>
-              <span onClick={() => navigat(item._id.toString())}>
+              <span onClick={() => navigat(`/product/${item._id.toString()}`)}>
                 {item.price} $
               </span>
-              <span onClick={() => navigat(item._id.toString())}>
+              <span onClick={() => navigat(`/product/${item._id.toString()}`)}>
                 rating: {item.rating}
               </span>
               <div className="card-actions justify-end">

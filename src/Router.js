@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./page/Home";
 import Settings from "./page/Settings";
 import Logout from "./page/LogOut";
@@ -8,6 +8,7 @@ import Cart from "./page/Cart";
 import Product from "./page/Product";
 import Login from "./page/Login";
 import SingUp from "./page/SingUp";
+import NotFound from "./components/NotFound";
 
 const Router = () => {
   return (
@@ -19,7 +20,9 @@ const Router = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sing-up" element={<SingUp />} />
-      <Route path="/:_id" element={<Product />} />
+      <Route path="/product/:_id" exact element={<Product />} />
+      <Route path="/not-found" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/not-found" />} />
     </Routes>
   );
 };

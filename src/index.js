@@ -6,11 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { CartProvider } from "./context/CartContext";
+import storeToolkit from "./features/storeToolkiy";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <Provider store={store}>
+    <Provider store={store} storeToolkit={storeToolkit}>
       <CartProvider>
         <App />
       </CartProvider>
