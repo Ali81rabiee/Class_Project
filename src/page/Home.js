@@ -31,7 +31,7 @@ const Home = () => {
             {error}
           </div>
         </div>
-      ) : data ? (
+      ) : (
         <div className="my-56 container grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
           {Object.values(data).map((item) => {
             return (
@@ -72,8 +72,6 @@ const Home = () => {
             );
           })}
         </div>
-      ) : (
-        ""
       )}
     </>
   );
