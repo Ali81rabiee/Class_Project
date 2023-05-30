@@ -8,6 +8,7 @@ import Cart from "./page/Cart";
 import Product from "./page/Product";
 import Login from "./page/Login";
 import SingUp from "./page/SingUp";
+import Address from "./page/Address";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/sing-up" element={<SingUp />} />
       <Route path="/:_id" element={<Product />} />
+      <Route path="/address" element={<Address />} />
     </Routes>
   );
 };

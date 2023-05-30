@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { cartContext } from "../context/CartContext";
 import CartItems from "../components/CartItems";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getprofile } from "../redux/action";
 
 const Cart = () => {
   const navigat = useNavigate();
+  const dispatch = useDispatch();
 
   const { getItems, lengthOfItems, getTotalPrice, addItem, removeItem } =
     useContext(cartContext);
