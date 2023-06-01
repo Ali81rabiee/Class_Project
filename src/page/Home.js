@@ -8,9 +8,7 @@ import "./Home.css";
 const Home = () => {
   const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
-  // const { dataProfile, loadingProfile, errorProfile } = useSelector(
-  //   (state) => state.profile,
-  // );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,7 +49,7 @@ const Home = () => {
               <div className="card-actions justify-end">
                 <button
                   className="btn absolute bottom-7 right-5 bg-color border-none"
-                  onClick={() => addItem(item._id)}>
+                  onClick={() => addItem(item)}>
                   Add to Cart
                 </button>
               </div>

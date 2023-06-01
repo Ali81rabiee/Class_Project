@@ -1,29 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../redux/action";
 const cartContext = createContext();
 const cartLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 const CartProvider = ({ children }) => {
   const [items, setItems] = useState(cartLocalStorage);
-  const { data } = useSelector((state) => state.products);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(items));
   }, [items]);
 
-  const addItem = (_id) => {
-    const filterProduct = data.filter((item) => item._id == _id)[0];
-    if (filterProduct === undefined) return;
-    const filterItems = items.filter((item) => item._id == _id);
+  const addItem = (product) => {
+    const filterItems = items.filter(
+      (item) => item.product._id === product._id,
+    );
     if (filterItems.length !== 0) {
       setItems((l) =>
         l.map((item) => {
-          if (item._id === _id) {
+          if (item.product._id === product._id) {
             item.quantity++;
             return item;
           } else {
@@ -33,7 +26,7 @@ const CartProvider = ({ children }) => {
       );
     } else {
       const item = {
-        _id,
+        product,
         quantity: 1,
       };
       setItems((l) => [...l, item]);
@@ -41,12 +34,12 @@ const CartProvider = ({ children }) => {
   };
 
   const removeItem = (_id) => {
-    const itemFilter = items.filter((item) => item._id === _id)[0];
+    const itemFilter = items.filter((item) => item.product._id === _id)[0];
     if (itemFilter === undefined) return;
     if (itemFilter.quantity > 1) {
       setItems((l) =>
         l.map((item) => {
-          if (item._id === _id) {
+          if (item.product._id === _id) {
             item.quantity--;
             return item;
           } else {
@@ -55,22 +48,16 @@ const CartProvider = ({ children }) => {
         }),
       );
     } else {
-      setItems((l) => l.filter((item) => item._id !== _id));
+      setItems((l) => l.filter((item) => item.product._id !== _id));
     }
-  };
-
-  const getItems = () => {
-    return items.map((item) => {
-      const filterData = data.filter((i) => i._id === item._id)[0];
-      filterData.quantity = item.quantity;
-      return filterData;
-    });
   };
 
   const getTotalPrice = () => {
     const allPrice = items.map((item) => {
-      const filterData = data.filter((i) => i._id === item._id)[0];
-      return filterData.price * item.quantity;
+      const filterData = items.filter(
+        (i) => i.product._id === item.product._id,
+      )[0];
+      return filterData.product.price * item.quantity;
     });
     return allPrice.reduce((pre, curr) => pre + curr, 0);
   };
@@ -78,8 +65,7 @@ const CartProvider = ({ children }) => {
   const value = {
     addItem,
     removeItem,
-
-    getItems,
+    items,
     getTotalPrice,
     lengthOfItems: items.length,
   };
