@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const navigat = useNavigate();
-
-  const { getItems, lengthOfItems, getTotalPrice, addItem, removeItem } =
+  const { lengthOfItems, getTotalPrice, addItem, removeItem, items } =
     useContext(cartContext);
   return (
     <div className="container pb-10 px-3">
@@ -17,9 +16,9 @@ const Cart = () => {
         <p className="my-auto">COUNT</p>
       </div>
       {lengthOfItems > 0 ? (
-        getItems().map((item) => (
+        items.map((item) => (
           <CartItems
-            key={item._id}
+            key={item.product._id}
             {...item}
             addItem={addItem}
             removeItem={removeItem}
