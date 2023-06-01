@@ -47,11 +47,19 @@ const Home = () => {
                 rating: {item.rating}
               </span>
               <div className="card-actions justify-end">
-                <button
-                  className="btn absolute bottom-7 right-5 bg-color border-none"
-                  onClick={() => addItem(item)}>
-                  Add to Cart
-                </button>
+                {item.countInStock < 1 ? (
+                  <button
+                    className="btn absolute bottom-7 right-5 bg-color border-none"
+                    disabled>
+                    Add to Cart
+                  </button>
+                ) : (
+                  <button
+                    className="btn absolute bottom-7 right-5 bg-color border-none"
+                    onClick={() => addItem(item)}>
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </div>
           </div>

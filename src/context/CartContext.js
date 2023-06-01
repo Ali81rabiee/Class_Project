@@ -16,7 +16,10 @@ const CartProvider = ({ children }) => {
     if (filterItems.length !== 0) {
       setItems((l) =>
         l.map((item) => {
-          if (item.product._id === product._id) {
+          if (
+            item.product._id === product._id &&
+            item.quantity < product.countInStock
+          ) {
             item.quantity++;
             return item;
           } else {
