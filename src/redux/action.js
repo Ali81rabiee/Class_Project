@@ -119,7 +119,7 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
       type: loginSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
-    localStorage.setItem("userToken", data.user.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
     console.log(data);
   } catch (error) {
     dispatch({
@@ -136,8 +136,7 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
 
 // action for profile
 
-export const getprofile = () => async (dispatch, getState) => {
-  const token = localStorage.getItem("userToken");
+export const getprofile = (token) => async (dispatch, getState) => {
   try {
     dispatch({
       type: proLoading,
@@ -163,6 +162,6 @@ export const getprofile = () => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error.response.data.message);
+    // console.log(error.response.data.message);
   }
 };

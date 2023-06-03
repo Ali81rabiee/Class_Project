@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getprofile } from "../redux/action";
 
 const Profile = () => {
-  const token = localStorage.getItem("userToken");
+  const tokenUser = JSON.parse(localStorage.getItem("user"));
   const { data, loading, error } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getprofile());
-  }, []);
+    dispatch(getprofile(tokenUser.token));
+  });
   console.log(data.user);
   console.log(error);
+  console.log(tokenUser);
   const user = { ...data.user };
   return (
     <div className="card w-80 bg-base-100 shadow-xl mt-40 mx-auto">

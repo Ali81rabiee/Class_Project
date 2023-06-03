@@ -4,12 +4,24 @@ import logo from "../image/logo.png";
 import "./Header.css";
 import { useDispatch } from "react-redux";
 import { cartContext } from "../context/CartContext";
+import { getprofile } from "../redux/action";
 
 const Header = () => {
-  const navigat = useNavigate();
   const dispatch = useDispatch();
-  const { lengthOfItems } = useContext(cartContext);
+  const navigat = useNavigate();
 
+  const { lengthOfItems } = useContext(cartContext);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getprofile(user.token));
+    } else {
+      return user;
+    }
+  });
+
+  console.log(user);
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
       <div className="flex-1">
@@ -39,16 +51,17 @@ const Header = () => {
           </label>
         </div>
         <div className="dropdown dropdown-end w-1/2">
-          {/* {data.success ? (
+          {user ? (
             <>
               <label
+                key={user._id}
                 tabIndex={0}
                 className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
                 style={{ width: "4rem", height: "4rem" }}>
                 <div>
                   <div className="avatar">
                     <div className="w-12">
-                      <img src={data.user.image} />
+                      <img src={user.image} />
                     </div>
                   </div>
                 </div>
@@ -57,22 +70,20 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li onClick={() => navigat("/profile")}>Profile</li>
-
                 <li onClick={() => navigat("/settings")}>Settings</li>
-
                 <li onClick={() => navigat("/logout")}>Logout</li>
               </ul>
             </>
-          ) : ( */}
-          <label
-            tabIndex={0}
-            className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
-            style={{ width: "4rem", height: "4rem" }}>
-            <div onClick={() => navigat("/login")}>
-              <span className="mt-3 block text-lg">log In</span>
-            </div>
-          </label>
-          {/* )} */}
+          ) : (
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
+              style={{ width: "4rem", height: "4rem" }}>
+              <div onClick={() => navigat("/login")}>
+                <span className="mt-3 block text-lg">log In</span>
+              </div>
+            </label>
+          )}
         </div>
       </div>
     </div>

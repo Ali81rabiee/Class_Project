@@ -29,7 +29,7 @@ const SingUp = () => {
               <div className="card-body">
                 <h2 className="text-2xl font-bold">
                   WELCOM TO
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}> R A Z E R</span>
                 </h2>
                 <div className="badge badge-error gap-2 mt-2 mx-auto h-auto">
                   {error.response.data.message[0]}
@@ -209,7 +209,7 @@ const SingUp = () => {
               <div className="card-body">
                 <h2 className="text-2xl font-bold">
                   WELCOM TO
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}> R A Z E R</span>
                 </h2>
                 <div className="badge-lg badge-success gap-2 h-auto">
                   {data.message}
@@ -388,7 +388,7 @@ const SingUp = () => {
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
               <div className="card-body">
                 <h2 className="text-2xl font-bold">
-                  WELCOM TO <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  WELCOM TO <span style={{ color: "#7ac142" }}> R A Z E R</span>
                 </h2>
                 <div className="form-control">
                   <label className="label">

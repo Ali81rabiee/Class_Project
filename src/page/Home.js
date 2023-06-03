@@ -2,69 +2,24 @@ import React, { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/action";
 import { cartContext } from "../context/CartContext";
-import { useNavigate } from "react-router-dom";
+import ProductItems from "../components/ProductItems";
+
 import "./Home.css";
 
 const Home = () => {
-  const navigat = useNavigate();
   const { data, loading, error } = useSelector((state) => state.products);
-
+  console.log(data);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
-
+  });
   const { addItem } = useContext(cartContext);
 
   return (
     <div className="container grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
-      {Object.values(data).map((item) => {
-        return (
-          <div
-            className="card w-auto mt-28 mx-5 glass border-none"
-            key={item._id}>
-            <figure
-              className="bg-white border-none"
-              onClick={() => navigat(`/product/${item._id.toString()}`)}>
-              <img src={item.image} alt="car!" className="border-none" />
-            </figure>
-            <div className="card-body h-72 border-none">
-              <h2
-                className="card-title block text-center"
-                onClick={() => navigat(`/product/${item._id.toString()}`)}>
-                {item.name}
-              </h2>
-              <span
-                onClick={() => navigat(`/product/${item._id.toString()}`)}
-                className="badge badge-lg indicator-item rounded-full text-2xl font-bold w-12 h-12 absolute -top-5 -right-5 bg-color border-none">
-                {item.countInStock}
-              </span>
-              <span onClick={() => navigat(`/product/${item._id.toString()}`)}>
-                {item.price} $
-              </span>
-              <span onClick={() => navigat(`/product/${item._id.toString()}`)}>
-                rating: {item.rating}
-              </span>
-              <div className="card-actions justify-end">
-                {item.countInStock < 1 ? (
-                  <button
-                    className="btn absolute bottom-7 right-5 bg-color border-none"
-                    disabled>
-                    Add to Cart
-                  </button>
-                ) : (
-                  <button
-                    className="btn absolute bottom-7 right-5 bg-color border-none"
-                    onClick={() => addItem(item)}>
-                    Add to Cart
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      {Object.values(data)?.map((item) => (
+        <ProductItems key={item._id} item={item} addItem={addItem} />
+      ))}
     </div>
   );
 };

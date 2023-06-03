@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getLogin } from "../redux/action";
+import { getLogin, getprofile } from "../redux/action";
 
 const Login = () => {
   const navigat = useNavigate();
@@ -14,6 +14,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
 
+  useEffect(() => {
+    if (user) {
+      dispatch(getprofile(data.user.token));
+    } else {
+      return;
+    }
+  });
+
   return (
     <div className="text-center">
       {data ? (
@@ -24,7 +32,7 @@ const Login = () => {
                 <h2 className="text-2xl font-bold">
                   WELCOM BACK TO
                   <br />
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}>R A Z E R</span>
                 </h2>
                 <div className="badge-lg badge-success gap-2 h-auto">
                   {data.message}
@@ -107,7 +115,7 @@ const Login = () => {
                 <h2 className="text-2xl font-bold">
                   WELCOM BACK TO
                   <br />
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}>R A Z E R</span>
                 </h2>
                 <div className="badge-lg badge-error gap-2 h-auto">
                   {error.response.data.message}
@@ -190,7 +198,7 @@ const Login = () => {
                 <h2 className="text-2xl font-bold">
                   WELCOM BACK TO
                   <br />
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}>R A Z E R</span>
                 </h2>
                 <div className="form-control">
                   <label className="label">
@@ -270,7 +278,7 @@ const Login = () => {
                 <h2 className="text-2xl font-bold">
                   WELCOM BACK TO
                   <br />
-                  <span style={{ color: "#7ac142" }}>R E Z E R</span>
+                  <span style={{ color: "#7ac142" }}>R A Z E R</span>
                 </h2>
                 <div className="form-control">
                   <label className="label">
