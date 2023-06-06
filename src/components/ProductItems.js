@@ -6,7 +6,6 @@ const ProductItems = ({ item, addItem }) => {
 
   return (
     <div>
-      {" "}
       <div className="card w-auto mt-28 mx-5 glass border-none" key={item._id}>
         <figure
           className="bg-white border-none"

@@ -10,6 +10,7 @@ import Login from "./page/Login";
 import SingUp from "./page/SingUp";
 import Address from "./page/Address";
 import NotFound from "./components/NotFound";
+import Loading from "./components/Loading";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
       <Route path="/not-found" element={<NotFound />} />
       <Route path="/address" element={<Address />} />
       <Route path="*" element={<Navigate to="/not-found" />} />
+      <Route path="/loading" element={<Loading />} />
     </Routes>
   );
 };

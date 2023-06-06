@@ -1,29 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { cartContext } from "../context/CartContext";
 import CartItems from "../components/CartItems";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getprofile } from "../redux/action";
 
 const Cart = () => {
   const navigat = useNavigate();
+  const dispatch = useDispatch();
   const { lengthOfItems, getTotalPrice, addItem, removeItem, items } =
     useContext(cartContext);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getprofile(user.token));
+    } else {
+      return;
+    }
+  }, []);
   return (
     <div className="container pb-10 px-3">
-      <div className="mt-28 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl bg-slate-300">
-        <h1 className="my-auto">IMAGE</h1>
-        <h1 className="my-auto">NAME</h1>
-        <p className="my-auto">PRICE</p>
-        <p className="my-auto">COUNT</p>
-      </div>
       {lengthOfItems > 0 ? (
-        items.map((item) => (
-          <CartItems
-            key={item.product._id}
-            {...item}
-            addItem={addItem}
-            removeItem={removeItem}
-          />
-        ))
+        <>
+          <div className="mt-28 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl glass">
+            <h1 className="my-auto">IMAGE</h1>
+            <h1 className="my-auto">NAME</h1>
+            <p className="my-auto">PRICE</p>
+            <p className="my-auto">COUNT</p>
+          </div>
+          {items.map((item) => (
+            <CartItems
+              key={item.product._id}
+              {...item}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
+          ))}
+        </>
       ) : (
         <div className="font-bold my-auto text-color text-center p-32">
           <div className="badge badge-warning gap-2 p-6 ">
@@ -43,15 +57,24 @@ const Cart = () => {
           </div>
         </div>
       )}
-      <h2 className="font-bold my-auto text-color text-center mt-3">
+
+      <h2 className="font-bold my-auto text-color text-center mt-32">
         {`TOTAL : ${getTotalPrice()}$`}
       </h2>
       {lengthOfItems > 0 ? (
-        <button
-          className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"
-          onClick={() => navigat("/login")}>
-          next
-        </button>
+        user ? (
+          <button
+            className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"
+            onClick={() => navigat("/address")}>
+            next
+          </button>
+        ) : (
+          <button
+            className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"
+            onClick={() => navigat("/login")}>
+            next
+          </button>
+        )
       ) : (
         <button
           className="btn bg-color fixed bottom-3 right-4 border-none w-1/5"

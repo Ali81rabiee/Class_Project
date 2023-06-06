@@ -2,7 +2,7 @@ import React from "react";
 
 const CartItems = ({ product, quantity, removeItem, addItem }) => {
   return (
-    <div className="mt-5 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl bg-slate-300">
+    <div className="mt-5 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl glass">
       <div className="h-40">
         <img src={product.image} className="h-5/6" />
       </div>

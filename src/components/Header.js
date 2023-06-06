@@ -17,9 +17,9 @@ const Header = () => {
     if (user) {
       dispatch(getprofile(user.token));
     } else {
-      return user;
+      return;
     }
-  });
+  }, []);
 
   console.log(user);
   return (
