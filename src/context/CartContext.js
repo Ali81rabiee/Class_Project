@@ -62,7 +62,9 @@ const CartProvider = ({ children }) => {
       )[0];
       return filterData.product.price * item.quantity;
     });
-    return allPrice.reduce((pre, curr) => pre + curr, 0);
+    const AllPrice = allPrice.reduce((pre, curr) => pre + curr, 0);
+    localStorage.setItem("allTotalPrice", JSON.stringify(AllPrice));
+    return AllPrice;
   };
 
   const value = {

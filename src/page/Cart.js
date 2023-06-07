@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { cartContext } from "../context/CartContext";
 import CartItems from "../components/CartItems";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getprofile } from "../redux/action";
 
 const Cart = () => {
