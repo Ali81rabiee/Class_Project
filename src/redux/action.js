@@ -15,6 +15,9 @@ import {
   singUpFailed,
   singUpLoading,
   singUpSuccess,
+  submitFailed,
+  submitLoading,
+  submitSuccess,
 } from "./constant";
 
 // req for products
@@ -36,7 +39,6 @@ export const getProducts = () => async (dispatch, getState) => {
       type: productsFailed,
       payload: { data: [], loading: false, error: error.message },
     });
-    console.log(error);
   }
 };
 
@@ -61,7 +63,6 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
       type: oneProductFailed,
       payload: { data: [], loading: false, error: error.message },
     });
-    console.log(error);
   }
 };
 
@@ -98,7 +99,6 @@ export const getsingUp =
           error: error,
         },
       });
-      console.log(error.response.data.message);
     }
   };
 
@@ -120,7 +120,6 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
       payload: { data: { ...data }, loading: false, error: "" },
     });
     localStorage.setItem("user", JSON.stringify(data.user));
-    console.log(data);
   } catch (error) {
     dispatch({
       type: loginFailed,
@@ -130,7 +129,6 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error.response.data.message);
   }
 };
 
@@ -162,6 +160,67 @@ export const getprofile = (token) => async (dispatch, getState) => {
         error: error,
       },
     });
-    // console.log(error.response.data.message);
   }
 };
+
+// action for Submit
+
+export const getSubmit =
+  (token, address, city, postalCode, phone, TotalPrice, userOrders) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: submitLoading,
+        payload: { data: [], loading: true, error: "" },
+      });
+
+      const { data } = await axios.post(
+        "http://kzico.runflare.run/order/submit",
+        {
+          orderItems: userOrders.map((item) => {
+            return { product: item.product._id, qty: item.quantity };
+          }),
+
+          shippingAddress: {
+            address: address,
+            city: city,
+            postalCode: postalCode,
+            phone: phone,
+          },
+          paymentMethod: "cash",
+          shippingPrice: "5",
+          totalPrice: TotalPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      dispatch({
+        type: submitSuccess,
+        payload: { data: { ...data }, loading: false, error: "" },
+      });
+      localStorage.removeItem("user address");
+      localStorage.removeItem("cart");
+      localStorage.removeItem("allTotalPrice");
+      console.log(data);
+    } catch (error) {
+      dispatch({
+        type: submitFailed,
+        payload: {
+          data: [],
+          loading: false,
+          error: error,
+        },
+      });
+      console.log(error);
+
+      // const orderItems = [
+      //   userOrders.map((item) => {
+      //     return { product: item.product._id, qty: item.quantity };
+      //   }),
+      // ];
+      // console.log(orderItems);
+    }
+  };

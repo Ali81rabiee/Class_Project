@@ -1,17 +1,37 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getSubmit } from "../redux/action";
 
 const CheckOut = () => {
+  const submit = useSelector((state) => state.submit);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userAddress = JSON.parse(localStorage.getItem("user address"));
   const userOrders = JSON.parse(localStorage.getItem("cart"));
   const TotalPrice = JSON.parse(localStorage.getItem("allTotalPrice"));
-  console.log(TotalPrice);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const submitHandlle = () => {
+    dispatch(
+      getSubmit(
+        user.token,
+        userAddress.address,
+        userAddress.city,
+        userAddress.postCode,
+        userAddress.phone,
+        TotalPrice,
+        userOrders,
+      ),
+    );
+    navigate("/order");
+  };
+
+  console.log(submit.data);
+  console.log(submit.error);
   return (
     <div className="hero min-h-screen">
       <div className="hero-content flex-col glass mt-20 py-10">
-        {/* <div className="flex justify-between w-full">
-          <h1 className="text-5xl text-center font-bold mx-40">Your Address</h1>
-          <h1 className="text-5xl text-center font-bold mx-40">Your orders</h1>
-        </div> */}
         <div className="flex lg:flex-row flex-col justify-between w-full">
           <div className="lg:w-1/2">
             <h1 className="text-5xl text-center font-bold mt-5">
@@ -58,6 +78,16 @@ const CheckOut = () => {
           </div>
         </div>
       </div>
+      <button
+        className="btn bg-color fixed bottom-16 lg:left-10 xl:left-10 left-5  border-none w-1/5"
+        onClick={() => navigate("/cart")}>
+        edit
+      </button>
+      <button
+        className="btn bg-color fixed bottom-3 lg:left-10 xl:left-10 left-5  border-none w-1/5"
+        onClick={submitHandlle}>
+        submit
+      </button>
     </div>
   );
 };

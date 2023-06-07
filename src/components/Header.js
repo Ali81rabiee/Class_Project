@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import "./Header.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartContext } from "../context/CartContext";
 import { getprofile } from "../redux/action";
 
@@ -12,7 +12,7 @@ const Header = () => {
 
   const { lengthOfItems } = useContext(cartContext);
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const { data } = useSelector((state) => state.profile);
   useEffect(() => {
     if (user) {
       dispatch(getprofile(user.token));
@@ -21,7 +21,6 @@ const Header = () => {
     }
   }, []);
 
-  console.log(user);
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
       <div className="flex-1">

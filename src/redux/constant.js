@@ -18,3 +18,7 @@ export const loginSuccess = "success";
 export const proLoading = "loading";
 export const proFailed = "failed";
 export const proSuccess = "success";
+// type for submit
+export const submitLoading = "loading";
+export const submitFailed = "failed";
+export const submitSuccess = "success";

@@ -14,6 +14,9 @@ import {
   singUpFailed,
   singUpLoading,
   singUpSuccess,
+  submitFailed,
+  submitLoading,
+  submitSuccess,
 } from "./constant";
 
 // create state for products
@@ -104,6 +107,25 @@ export const profile = (
     case proFailed:
       return payload;
     case proSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// submit
+
+export const submit = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case submitLoading:
+      return payload;
+    case submitFailed:
+      return payload;
+    case submitSuccess:
       return payload;
 
     default:
