@@ -12,12 +12,8 @@ const Orders = () => {
     dispatch(getOrder(user.token));
   }, []);
   const navigate = useNavigate();
-  console.log(error);
   return (
-    <div
-      className="grid grid-col-1 justify-items-center content-center mt-20 gap-8"
-      // style={{ minHeight: "2000px" }}
-    >
+    <div className="grid grid-col-1 justify-items-center content-center mt-20 gap-8">
       {loading ? (
         <Loading />
       ) : error ? (

@@ -163,7 +163,6 @@ const Address = () => {
                   next
                 </button>
               )}
-              {/* <button className="btn bg-color border-none">next</button> */}
             </div>
           </div>
         </div>

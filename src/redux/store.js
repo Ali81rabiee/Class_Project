@@ -12,6 +12,9 @@ import {
   submit,
   oneOrder,
   order,
+  changeProfile,
+  changePass,
+  uploadAvatar,
 } from "./reducer";
 import thunk from "redux-thunk";
 
@@ -24,6 +27,9 @@ const reducers = combineReducers({
   submit,
   oneOrder,
   order,
+  changeProfile,
+  changePass,
+  uploadAvatar,
 });
 const middleWare = [thunk];
 const initialState = {};

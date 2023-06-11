@@ -2,17 +2,18 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import "./Header.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartContext } from "../context/CartContext";
 import { getprofile } from "../redux/action";
+import Swal from "sweetalert2";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const navigat = useNavigate();
+  const navigate = useNavigate();
 
   const { lengthOfItems } = useContext(cartContext);
   const user = JSON.parse(localStorage.getItem("user"));
-  const { data } = useSelector((state) => state.profile);
+
   useEffect(() => {
     if (user) {
       dispatch(getprofile(user.token));
@@ -21,15 +22,23 @@ const Header = () => {
     }
   }, []);
 
+  const handleLogOut = () => {
+    localStorage.removeItem("user");
+
+    Swal.fire("log out", "log out is true", "success").then(() => {
+      navigate("/");
+    });
+  };
+
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
       <div className="flex-1">
-        <img src={logo} className="-mt-6" onClick={() => navigat("/")} />
+        <img src={logo} className="-mt-6" onClick={() => navigate("/")} />
       </div>
       <div className="flex-none w-40">
         <div className="dropdown dropdown-end w-1/2">
           <label tabIndex={0} className="btn btn-ghost btn-circle mx-4">
-            <div className="indicator" onClick={() => navigat("/cart")}>
+            <div className="indicator" onClick={() => navigate("/cart")}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-10 w-10"
@@ -68,10 +77,12 @@ const Header = () => {
               <ul
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li onClick={() => navigat("/profile")}>Profile</li>
-                <li onClick={() => navigat("/orders")}>Orders</li>
-                <li onClick={() => navigat("/settings")}>Settings</li>
-                <li onClick={() => navigat("/logout")}>Logout</li>
+                <li onClick={() => navigate("/profile")}>Profile</li>
+                <li onClick={() => navigate("/orders")}>Orders</li>
+                <li onClick={() => navigate("/setting/change-profile")}>
+                  Setting
+                </li>
+                <li onClick={handleLogOut}>Logout</li>
               </ul>
             </>
           ) : (
@@ -79,7 +90,7 @@ const Header = () => {
               tabIndex={0}
               className="btn btn-ghost btn-circle avatar mx-3.5 items-center"
               style={{ width: "4rem", height: "4rem" }}>
-              <div onClick={() => navigat("/login")}>
+              <div onClick={() => navigate("/login")}>
                 <span className="mt-3 block text-lg">log In</span>
               </div>
             </label>

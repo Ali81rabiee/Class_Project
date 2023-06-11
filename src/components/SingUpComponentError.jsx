@@ -1,6 +1,6 @@
 import React from "react";
 import { getsingUp } from "../redux/action";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const SingUpComponentError = ({
@@ -21,8 +21,7 @@ export const SingUpComponentError = ({
 }) => {
   const navigat = useNavigate();
   const dispatch = useDispatch();
-  // const { error } = useSelector((state) => state.singUp);
-  console.log(error);
+
 
   return (
     <div className="hero min-h-screen">

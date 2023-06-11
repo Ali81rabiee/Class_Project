@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getLogin, getprofile } from "../redux/action";
+import { getLogin } from "../redux/action";
 
 const LoginError = ({ error, user, setUser, pass, setPass, passRegex }) => {
   const dispatch = useDispatch();

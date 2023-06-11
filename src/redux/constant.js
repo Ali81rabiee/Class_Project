@@ -30,3 +30,15 @@ export const oneOrderSuccess = "success";
 export const orderLoading = "loading";
 export const orderFailed = "failed";
 export const orderSuccess = "success";
+//type for change profile
+export const changeProfileLoading = "loading";
+export const changeProfileFailed = "failed";
+export const changeProfileSuccess = "success";
+//type for change Password
+export const changePasswordLoading = "loading";
+export const changePasswordFailed = "failed";
+export const changePasswordSuccess = "success";
+//type for upload avatar
+export const uploadAvatarLoading = "loading";
+export const uploadAvatarFailed = "failed";
+export const uploadAvatarSuccess = "success";

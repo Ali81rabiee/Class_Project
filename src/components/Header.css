@@ -2,8 +2,6 @@
   position: fixed;
   top: 0;
   z-index: 2;
-  /* background-color: black; */
-  color: #7ac142;
 }
 
 li:hover {

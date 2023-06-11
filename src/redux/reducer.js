@@ -1,4 +1,13 @@
 import {
+  changePasswordFailed,
+  changePasswordLoading,
+  changePasswordSuccess,
+  changeProfileFailed,
+  changeProfileLoading,
+  changeProfileSuccess,
+  logOutFailed,
+  logOutLoading,
+  logOutSuccess,
   loginFailed,
   loginLoading,
   loginSuccess,
@@ -23,6 +32,9 @@ import {
   submitFailed,
   submitLoading,
   submitSuccess,
+  uploadAvatarFailed,
+  uploadAvatarLoading,
+  uploadAvatarSuccess,
 } from "./constant";
 
 // create state for products
@@ -170,6 +182,63 @@ export const order = (
     case orderFailed:
       return payload;
     case orderSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// change profile
+
+export const changeProfile = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case changeProfileLoading:
+      return payload;
+    case changeProfileFailed:
+      return payload;
+    case changeProfileSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// change profile
+
+export const changePass = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case changePasswordLoading:
+      return payload;
+    case changePasswordFailed:
+      return payload;
+    case changePasswordSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// upload Avatar
+
+export const uploadAvatar = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case uploadAvatarLoading:
+      return payload;
+    case uploadAvatarFailed:
+      return payload;
+    case uploadAvatarSuccess:
       return payload;
 
     default:

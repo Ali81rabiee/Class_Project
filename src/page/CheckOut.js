@@ -35,7 +35,6 @@ const CheckOut = () => {
       navigate(`/orders/${submit.data._id}`);
     });
   };
-  console.log(submit.data);
 
   return (
     <div className="hero min-h-screen">

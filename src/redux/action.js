@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  changeProfileFailed,
+  changeProfileLoading,
+  changeProfileSuccess,
   loginFailed,
   loginLoading,
   loginSuccess,
@@ -24,6 +27,12 @@ import {
   submitFailed,
   submitLoading,
   submitSuccess,
+  uploadAvatarFailed,
+  uploadAvatarLoading,
+  uploadAvatarSuccess,
+  changePasswordLoading,
+  changePasswordSuccess,
+  changePasswordFailed,
 } from "./constant";
 
 // req for products
@@ -45,7 +54,6 @@ export const getProducts = () => async (dispatch, getState) => {
       type: productsFailed,
       payload: { data: [], loading: false, error: error },
     });
-    console.log(error);
   }
 };
 
@@ -70,7 +78,6 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
       type: oneProductFailed,
       payload: { data: [], loading: false, error: error },
     });
-    console.log(error);
   }
 };
 
@@ -97,7 +104,6 @@ export const getsingUp =
         type: singUpSuccess,
         payload: { data: { ...data }, loading: false, error: "" },
       });
-      console.log(data);
     } catch (error) {
       dispatch({
         type: singUpFailed,
@@ -107,7 +113,6 @@ export const getsingUp =
           error: error,
         },
       });
-      console.log(error);
     }
   };
 
@@ -138,7 +143,6 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error);
   }
 };
 
@@ -160,6 +164,7 @@ export const getprofile = (token) => async (dispatch, getState) => {
       type: proSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
+    localStorage.setItem("user", JSON.stringify(data.user));
   } catch (error) {
     dispatch({
       type: proFailed,
@@ -169,7 +174,6 @@ export const getprofile = (token) => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error);
   }
 };
 
@@ -220,7 +224,6 @@ export const getSubmit =
           error: error,
         },
       });
-      console.log(error);
     }
   };
 
@@ -242,8 +245,6 @@ export const getOneOrder = (token, _id) => async (dispatch, getState) => {
       type: oneOrderSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
-
-    console.log(data);
   } catch (error) {
     dispatch({
       type: oneOrderFailed,
@@ -253,7 +254,6 @@ export const getOneOrder = (token, _id) => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error);
   }
 };
 
@@ -275,8 +275,6 @@ export const getOrder = (token) => async (dispatch, getState) => {
       type: orderSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
-
-    console.log(data);
   } catch (error) {
     dispatch({
       type: orderFailed,
@@ -286,6 +284,120 @@ export const getOrder = (token) => async (dispatch, getState) => {
         error: error,
       },
     });
-    console.log(error);
   }
 };
+
+// action for change profile
+
+export const getChangeProfile =
+  (token, firstName, lastName, gender, age, city) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: changeProfileLoading,
+        payload: { data: [], loading: true, error: "" },
+      });
+
+      const { data } = await axios.put(
+        `http://kzico.runflare.run/user/change-profile`,
+        {
+          firstname: `${firstName}`,
+          lastname: `${lastName}`,
+          gender: `${gender}`,
+          age: age,
+          city: `${city}`,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      dispatch({
+        type: changeProfileSuccess,
+        payload: { data: { ...data }, loading: false, error: "" },
+      });
+    } catch (error) {
+      dispatch({
+        type: changeProfileFailed,
+        payload: {
+          data: [],
+          loading: false,
+          error: error,
+        },
+      });
+    }
+  };
+
+// action for change password
+
+export const getChangePass =
+  (token, oldPassword, newPassword) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: changePasswordLoading,
+        payload: { data: [], loading: true, error: "" },
+      });
+
+      const { data } = await axios.put(
+        "http://kzico.runflare.run/user/change-password",
+        {
+          old_password: `${oldPassword}`,
+          new_password: `${newPassword}`,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      dispatch({
+        type: changePasswordSuccess,
+        payload: { data: { ...data }, loading: false, error: "" },
+      });
+    } catch (error) {
+      dispatch({
+        type: changePasswordFailed,
+        payload: {
+          data: [],
+          loading: false,
+          error: error,
+        },
+      });
+    }
+  };
+
+// action for change password
+
+export const getUploadAvatar =
+  (token, formData) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: uploadAvatarLoading,
+        payload: { data: [], loading: true, error: "" },
+      });
+
+      const { data } = await axios.post(
+        "http://kzico.runflare.run/user/profile-image",
+        formData,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      dispatch({
+        type: uploadAvatarSuccess,
+        payload: { data: { ...data }, loading: false, error: "" },
+      });
+    } catch (error) {
+      dispatch({
+        type: uploadAvatarFailed,
+        payload: {
+          data: [],
+          loading: false,
+          error: error,
+        },
+      });
+    }
+  };

@@ -14,8 +14,6 @@ const Home = () => {
   }, []);
   const { addItem } = useContext(cartContext);
 
-  console.log(products.error);
-
   return (
     <>
       {products.loading ? (

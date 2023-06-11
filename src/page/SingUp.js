@@ -27,7 +27,6 @@ const SingUp = () => {
       navigate("/login");
     });
   };
-  console.log(data);
 
   return (
     <div className="text-center mt-10 p-20">

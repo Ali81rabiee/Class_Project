@@ -11,10 +11,23 @@ body {
 .bg-color {
   background-color: #7ac142;
 }
+.color {
+  color: #7ac142;
+}
 .text-color {
   color: #000000;
 }
 .bg-color:hover {
   background-color: #000000;
   /* color: black; */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

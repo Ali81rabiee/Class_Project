@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./page/Home";
-import Settings from "./page/Settings";
-import Logout from "./page/LogOut";
 import Profile from "./page/Profile";
 import Cart from "./page/Cart";
 import Product from "./page/Product";
@@ -13,13 +11,20 @@ import NotFound from "./components/NotFound";
 import CheckOut from "./page/CheckOut";
 import Order from "./page/Order";
 import Orders from "./page/Orders";
+import ChangeProfile from "./page/ChangeProfile";
+import ChangePass from "./page/ChangePass";
+import Setting from "./page/Setting";
+import ChangeAvatar from "./page/ChangeAvatar";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/logout" element={<Logout />} />
+      <Route path="/setting" element={<Setting />}>
+        <Route path="change-profile" element={<ChangeProfile />} />
+        <Route path="change-password" element={<ChangePass />} />
+        <Route path="change-avatar" element={<ChangeAvatar />} />
+      </Route>
       <Route path="/profile" element={<Profile />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/login" element={<Login />} />

@@ -10,11 +10,10 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getprofile(tokenUser.token));
   }, []);
-  console.log(data.user);
-  console.log(error);
+
   const user = { ...data.user };
   return (
-    <>
+    <div className="min-h-screen">
       {loading ? (
         <Loading />
       ) : error ? (
@@ -22,18 +21,23 @@ const Profile = () => {
           <p className="text-3xl text-red-700">{error.message}</p>
         </div>
       ) : (
-        <div className="card w-80 glass shadow-xl mt-40 mx-auto">
+        <div className="card w-80 glass shadow-xl my-40 mx-auto">
           <figure className="px-10 pt-10">
             <img src={user.image} alt="profile" className="rounded-xl" />
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title">{user.username}</h2>
-            <p>{user.email}</p>
-            <p>{user.mobile}</p>
+            <h2 className="card-title">{user.email}</h2>
+            <h2 className="card-title">{user.mobile}</h2>
+            <p>{user.firstname}</p>
+            <p>{user.lastname}</p>
+            <p>{user.gender}</p>
+            <p>{user.age}</p>
+            <p>{user.city}</p>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
