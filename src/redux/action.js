@@ -43,7 +43,7 @@ export const getProducts = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: productsFailed,
-      payload: { data: [], loading: false, error: error.response.data },
+      payload: { data: [], loading: false, error: error },
     });
     console.log(error);
   }
@@ -68,7 +68,7 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: oneProductFailed,
-      payload: { data: [], loading: false, error: error.response.data },
+      payload: { data: [], loading: false, error: error },
     });
     console.log(error);
   }
@@ -104,7 +104,7 @@ export const getsingUp =
         payload: {
           data: [],
           loading: false,
-          error: error.response.data,
+          error: error,
         },
       });
       console.log(error);
@@ -135,7 +135,7 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
       payload: {
         data: [],
         loading: false,
-        error: error.response.data,
+        error: error,
       },
     });
     console.log(error);
@@ -166,7 +166,7 @@ export const getprofile = (token) => async (dispatch, getState) => {
       payload: {
         data: [],
         loading: false,
-        error: error.response.data,
+        error: error,
       },
     });
     console.log(error);
@@ -217,7 +217,7 @@ export const getSubmit =
         payload: {
           data: [],
           loading: false,
-          error: error.response.data,
+          error: error,
         },
       });
       console.log(error);
@@ -250,7 +250,7 @@ export const getOneOrder = (token, _id) => async (dispatch, getState) => {
       payload: {
         data: [],
         loading: false,
-        error: error.response.data,
+        error: error,
       },
     });
     console.log(error);
@@ -283,7 +283,7 @@ export const getOrder = (token) => async (dispatch, getState) => {
       payload: {
         data: [],
         loading: false,
-        error: error.response.data,
+        error: error,
       },
     });
     console.log(error);

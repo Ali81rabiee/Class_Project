@@ -21,7 +21,7 @@ const Home = () => {
       {products.loading ? (
         <Loading />
       ) : products.error ? (
-        <p className="mt-40">error</p>
+        <p className="text-3xl text-red-700">{products.error.message}</p>
       ) : (
         <div className="container grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
           {Object.values(products.data)?.map((item) => (

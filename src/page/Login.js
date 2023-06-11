@@ -6,18 +6,23 @@ import Loading from "../components/Loading";
 import LoginTrue from "../components/LoginTrue";
 import LoginError from "../components/LoginError";
 import LoginComponent from "../components/LoginComponent";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const navigat = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [pass, setPass] = useState({
     value: "",
     isTached: false,
   });
-  const { data, loading, error } = useSelector((state) => state.login);
+  const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
-
+  const showAlert = () => {
+    Swal.fire("login", login.data.message, "success").then(() => {
+      navigate("/profile");
+    });
+  };
   // useEffect(() => {
   //   if (user) {
   //     dispatch(getprofile(data.user.token));
@@ -25,28 +30,21 @@ const Login = () => {
   //     return;
   //   }
   // });
-
+  console.log(login.data);
   return (
     <div className="text-center">
-      {data ? (
-        <LoginTrue
-          data={data}
-          user={user}
-          setUser={setUser}
-          pass={pass}
-          setPass={setPass}
-          passRegex={passRegex}
-        />
-      ) : error ? (
+      {login.data.success ? (
+        showAlert()
+      ) : login.error ? (
         <LoginError
-          error={error}
+          error={login.error}
           user={user}
           setUser={setUser}
           pass={pass}
           setPass={setPass}
           passRegex={passRegex}
         />
-      ) : loading ? (
+      ) : login.loading ? (
         <Loading />
       ) : (
         <LoginComponent

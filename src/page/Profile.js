@@ -19,9 +19,7 @@ const Profile = () => {
         <Loading />
       ) : error ? (
         <div className="font-bold my-auto text-color text-center p-32">
-          <div className="badge badge-error gap-2 p-6 mt-40">
-            {error.response.data.message}
-          </div>
+          <p className="text-3xl text-red-700">{error.message}</p>
         </div>
       ) : (
         <div className="card w-80 glass shadow-xl mt-40 mx-auto">

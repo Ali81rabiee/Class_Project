@@ -19,9 +19,7 @@ const Product = () => {
         <Loading />
       ) : error ? (
         <div className="flex justify-center items-center p-72">
-          <div className="badge badge-lg text-2xl badge-error gap-2">
-            {error}
-          </div>
+          <p className="text-3xl text-red-700">{error.message}</p>
         </div>
       ) : data ? (
         <>

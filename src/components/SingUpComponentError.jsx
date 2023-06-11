@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export const SingUpComponentError = ({
+  error,
   username,
   email,
   password,
@@ -20,8 +21,8 @@ export const SingUpComponentError = ({
 }) => {
   const navigat = useNavigate();
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.singUp);
-  console.log(error.response.data.message);
+  // const { error } = useSelector((state) => state.singUp);
+  console.log(error);
 
   return (
     <div className="hero min-h-screen">
@@ -33,7 +34,7 @@ export const SingUpComponentError = ({
               <span style={{ color: "#7ac142" }}> R A Z E R</span>
             </h2>
             <div className="badge badge-error gap-2 mt-2 mx-auto h-auto">
-              {error.response.data.message}
+              {error.message}
             </div>
             <div className="form-control">
               <label className="label">
