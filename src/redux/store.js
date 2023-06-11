@@ -10,6 +10,8 @@ import {
   login,
   profile,
   submit,
+  oneOrder,
+  order,
 } from "./reducer";
 import thunk from "redux-thunk";
 
@@ -20,6 +22,8 @@ const reducers = combineReducers({
   login,
   profile,
   submit,
+  oneOrder,
+  order,
 });
 const middleWare = [thunk];
 const initialState = {};

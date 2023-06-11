@@ -3,9 +3,15 @@ import {
   loginFailed,
   loginLoading,
   loginSuccess,
+  oneOrderFailed,
+  oneOrderLoading,
+  oneOrderSuccess,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
+  orderFailed,
+  orderLoading,
+  orderSuccess,
   proFailed,
   proLoading,
   proSuccess,
@@ -37,8 +43,9 @@ export const getProducts = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: productsFailed,
-      payload: { data: [], loading: false, error: error.message },
+      payload: { data: [], loading: false, error: error.response.data },
     });
+    console.log(error);
   }
 };
 
@@ -61,8 +68,9 @@ export const getOneProduct = (_id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: oneProductFailed,
-      payload: { data: [], loading: false, error: error.message },
+      payload: { data: [], loading: false, error: error.response.data },
     });
+    console.log(error);
   }
 };
 
@@ -96,9 +104,10 @@ export const getsingUp =
         payload: {
           data: [],
           loading: false,
-          error: error,
+          error: error.response.data,
         },
       });
+      console.log(error);
     }
   };
 
@@ -126,9 +135,10 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
       payload: {
         data: [],
         loading: false,
-        error: error,
+        error: error.response.data,
       },
     });
+    console.log(error);
   }
 };
 
@@ -150,16 +160,16 @@ export const getprofile = (token) => async (dispatch, getState) => {
       type: proSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
-    console.log(data);
   } catch (error) {
     dispatch({
       type: proFailed,
       payload: {
         data: [],
         loading: false,
-        error: error,
+        error: error.response.data,
       },
     });
+    console.log(error);
   }
 };
 
@@ -201,26 +211,81 @@ export const getSubmit =
         type: submitSuccess,
         payload: { data: { ...data }, loading: false, error: "" },
       });
-      localStorage.removeItem("user address");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("allTotalPrice");
-      console.log(data);
     } catch (error) {
       dispatch({
         type: submitFailed,
         payload: {
           data: [],
           loading: false,
-          error: error,
+          error: error.response.data,
         },
       });
       console.log(error);
-
-      // const orderItems = [
-      //   userOrders.map((item) => {
-      //     return { product: item.product._id, qty: item.quantity };
-      //   }),
-      // ];
-      // console.log(orderItems);
     }
   };
+
+// action for one order
+
+export const getOneOrder = (token, _id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: oneOrderLoading,
+      payload: { data: [], loading: true, error: "" },
+    });
+
+    const { data } = await axios.get(`http://kzico.runflare.run/order/${_id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: oneOrderSuccess,
+      payload: { data: { ...data }, loading: false, error: "" },
+    });
+
+    console.log(data);
+  } catch (error) {
+    dispatch({
+      type: oneOrderFailed,
+      payload: {
+        data: [],
+        loading: false,
+        error: error.response.data,
+      },
+    });
+    console.log(error);
+  }
+};
+
+// action for order
+
+export const getOrder = (token) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: orderLoading,
+      payload: { data: [], loading: true, error: "" },
+    });
+
+    const { data } = await axios.get(`http://kzico.runflare.run/order/`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    dispatch({
+      type: orderSuccess,
+      payload: { data: { ...data }, loading: false, error: "" },
+    });
+
+    console.log(data);
+  } catch (error) {
+    dispatch({
+      type: orderFailed,
+      payload: {
+        data: [],
+        loading: false,
+        error: error.response.data,
+      },
+    });
+    console.log(error);
+  }
+};

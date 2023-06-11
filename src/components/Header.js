@@ -69,7 +69,7 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li onClick={() => navigat("/profile")}>Profile</li>
-                <li onClick={() => navigat("/settings")}>Settings</li>
+                <li onClick={() => navigat("/orders")}>Orders</li>
                 <li onClick={() => navigat("/logout")}>Logout</li>
               </ul>
             </>

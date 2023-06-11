@@ -21,7 +21,6 @@ const Address = () => {
   const handellUserAddress = () => {
     localStorage.setItem("user address", JSON.stringify(userAddress));
     navigate("/check-out");
-    console.log("first");
   };
 
   return (

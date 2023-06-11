@@ -22,3 +22,11 @@ export const proSuccess = "success";
 export const submitLoading = "loading";
 export const submitFailed = "failed";
 export const submitSuccess = "success";
+// type for one orders
+export const oneOrderLoading = "loading";
+export const oneOrderFailed = "failed";
+export const oneOrderSuccess = "success";
+// type for orders
+export const orderLoading = "loading";
+export const orderFailed = "failed";
+export const orderSuccess = "success";

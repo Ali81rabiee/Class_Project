@@ -2,9 +2,15 @@ import {
   loginFailed,
   loginLoading,
   loginSuccess,
+  oneOrderFailed,
+  oneOrderLoading,
+  oneOrderSuccess,
   oneProductFailed,
   oneProductLoading,
   oneProductSuccess,
+  orderFailed,
+  orderLoading,
+  orderSuccess,
   proFailed,
   proLoading,
   proSuccess,
@@ -126,6 +132,44 @@ export const submit = (
     case submitFailed:
       return payload;
     case submitSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// one order
+
+export const oneOrder = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case oneOrderLoading:
+      return payload;
+    case oneOrderFailed:
+      return payload;
+    case oneOrderSuccess:
+      return payload;
+
+    default:
+      return state;
+  }
+};
+
+// one order
+
+export const order = (
+  state = { data: [], loading: false, error: "" },
+  { type, payload },
+) => {
+  switch (type) {
+    case orderLoading:
+      return payload;
+    case orderFailed:
+      return payload;
+    case orderSuccess:
       return payload;
 
     default:

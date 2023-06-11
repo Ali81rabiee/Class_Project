@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getSubmit } from "../redux/action";
+import Loading from "../components/Loading";
 
 const CheckOut = () => {
   const submit = useSelector((state) => state.submit);
@@ -24,11 +25,8 @@ const CheckOut = () => {
         userOrders,
       ),
     );
-    navigate("/order");
   };
 
-  console.log(submit.data);
-  console.log(submit.error);
   return (
     <div className="hero min-h-screen">
       <div className="hero-content flex-col glass mt-20 py-10">
@@ -85,7 +83,16 @@ const CheckOut = () => {
       </button>
       <button
         className="btn bg-color fixed bottom-3 lg:left-10 xl:left-10 left-5  border-none w-1/5"
-        onClick={submitHandlle}>
+        onClick={() => {
+          submitHandlle();
+          setTimeout(() => {
+            navigate(`/orders/${submit.data._id}`);
+            localStorage.removeItem("user address");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("allTotalPrice");
+            console.log(submit.data._id);
+          }, 10000);
+        }}>
         submit
       </button>
     </div>
