@@ -11,7 +11,6 @@ const Profile = () => {
     dispatch(getprofile(tokenUser.token));
   }, []);
 
-  const user = { ...data.user };
   return (
     <div className="min-h-screen">
       {loading ? (
@@ -23,17 +22,17 @@ const Profile = () => {
       ) : (
         <div className="card w-80 glass shadow-xl my-40 mx-auto">
           <figure className="px-10 pt-10">
-            <img src={user.image} alt="profile" className="rounded-xl" />
+            <img src={tokenUser.image} alt="profile" className="rounded-xl" />
           </figure>
           <div className="card-body items-center text-center">
-            <h2 className="card-title">{user.username}</h2>
-            <h2 className="card-title">{user.email}</h2>
-            <h2 className="card-title">{user.mobile}</h2>
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
-            <p>{user.gender}</p>
-            <p>{user.age}</p>
-            <p>{user.city}</p>
+            <h2 className="card-title">{tokenUser.username}</h2>
+            <h2 className="card-title">{tokenUser.email}</h2>
+            <h2 className="card-title">{tokenUser.mobile}</h2>
+            <p>{tokenUser.firstname}</p>
+            <p>{tokenUser.lastname}</p>
+            <p>{tokenUser.gender}</p>
+            <p>{tokenUser.age}</p>
+            <p>{tokenUser.city}</p>
           </div>
         </div>
       )}

@@ -20,7 +20,7 @@ const Orders = () => {
       {loading ? (
         <Loading />
       ) : error ? (
-        <p className="text-3xl text-red-700">{error.message}</p>
+        <p className="text-3xl text-red-700">{error.response.data.message}</p>
       ) : (
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card flex-shrink-0 w-auto max-w-sm shadow-2xl glass">

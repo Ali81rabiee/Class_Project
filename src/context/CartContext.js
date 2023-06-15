@@ -67,11 +67,23 @@ const CartProvider = ({ children }) => {
     return AllPrice;
   };
 
+  const getTotalQuantity = () => {
+    const allQuantity = items.map((item) => {
+      const filterData = items.filter(
+        (i) => i.product._id === item.product._id,
+      )[0];
+      return filterData.quantity + item.quantity;
+    });
+    const AllQuantity = allQuantity.reduce((pre, curr) => pre + curr, 0);
+    return AllQuantity;
+  };
+
   const value = {
     addItem,
     removeItem,
     items,
     getTotalPrice,
+    getTotalQuantity,
     lengthOfItems: items.length,
   };
   return <cartContext.Provider value={value}>{children}</cartContext.Provider>;

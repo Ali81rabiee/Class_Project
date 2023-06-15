@@ -13,7 +13,8 @@ const ChangePass = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [oldPass, setOldPass] = useState({ value: "", isTached: false });
   const [newPass, setNewPass] = useState({ value: "", isTached: false });
-  const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
+  const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
   const handellChangePass = () => {
     dispatch(getChangePass(user.token, oldPass.value, newPass.value));
   };
@@ -23,7 +24,7 @@ const ChangePass = () => {
     });
   };
   return (
-    <div className="hero min-h-screen">
+    <div className="hero mt-10">
       <div className="hero-content flex-col lg:flex-row-reverse">
         {changePass.Loading ? (
           <Loading />
@@ -33,7 +34,7 @@ const ChangePass = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
             <div className="card-body">
               <div className="badge-lg badge-error gap-2 h-5">
-                {changePass.error.message}
+                {changePass.error.response.data.message}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -96,17 +97,20 @@ const ChangePass = () => {
                 )}
               </div>
               <div className="form-control mt-6">
-                {passRegex.test(oldPass.value) &&
-                passRegex.test(newPass.value) ? (
+                {!passRegex.test(oldPass.value) ? (
+                  <button className="btn bg-color border-none" disabled>
+                    Update password
+                  </button>
+                ) : !passRegex.test(newPass.value) ? (
+                  <button className="btn bg-color border-none" disabled>
+                    Update password
+                  </button>
+                ) : (
                   <button
                     className="btn bg-color border-none"
                     onClick={() => {
                       handellChangePass();
                     }}>
-                    Update password
-                  </button>
-                ) : (
-                  <button className="btn bg-color border-none" disabled>
                     Update password
                   </button>
                 )}
@@ -170,20 +174,30 @@ const ChangePass = () => {
                     })
                   }
                 />
-                {/* {newPass.isTached && !passRegex.test(newPass.value) && (
+                {newPass.isTached && !passRegex.test(newPass.value) && (
                   <div className="badge badge-error mt-2 mx-auto gap-2">
                     password is not valid
                   </div>
-                )} */}
+                )}
               </div>
               <div className="form-control mt-6">
-                <button
-                  className="btn bg-color border-none"
-                  onClick={() => {
-                    handellChangePass();
-                  }}>
-                  Update password
-                </button>
+                {!passRegex.test(oldPass.value) ? (
+                  <button className="btn bg-color border-none" disabled>
+                    Update password
+                  </button>
+                ) : !passRegex.test(newPass.value) ? (
+                  <button className="btn bg-color border-none" disabled>
+                    Update password
+                  </button>
+                ) : (
+                  <button
+                    className="btn bg-color border-none"
+                    onClick={() => {
+                      handellChangePass();
+                    }}>
+                    Update password
+                  </button>
+                )}
               </div>
             </div>
           </div>

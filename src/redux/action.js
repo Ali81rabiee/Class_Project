@@ -34,6 +34,7 @@ import {
   changePasswordSuccess,
   changePasswordFailed,
 } from "./constant";
+import { useNavigate } from "react-router-dom";
 
 // req for products
 
@@ -133,7 +134,7 @@ export const getLogin = (user, pass) => async (dispatch, getState) => {
       type: loginSuccess,
       payload: { data: { ...data }, loading: false, error: "" },
     });
-    localStorage.setItem("user", JSON.stringify(data.user));
+    console.log(data);
   } catch (error) {
     dispatch({
       type: loginFailed,
@@ -165,6 +166,7 @@ export const getprofile = (token) => async (dispatch, getState) => {
       payload: { data: { ...data }, loading: false, error: "" },
     });
     localStorage.setItem("user", JSON.stringify(data.user));
+    console.log(data);
   } catch (error) {
     dispatch({
       type: proFailed,
@@ -174,6 +176,7 @@ export const getprofile = (token) => async (dispatch, getState) => {
         error: error,
       },
     });
+    localStorage.removeItem("user");
   }
 };
 

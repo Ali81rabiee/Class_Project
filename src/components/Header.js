@@ -1,34 +1,35 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../image/logo.png";
 import "./Header.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartContext } from "../context/CartContext";
 import { getprofile } from "../redux/action";
-import Swal from "sweetalert2";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { lengthOfItems } = useContext(cartContext);
+  const profile = useSelector((state) => state.profile);
   const user = JSON.parse(localStorage.getItem("user"));
-
-  useEffect(() => {
-    if (user) {
-      dispatch(getprofile(user.token));
-    } else {
-      return;
-    }
-  }, []);
-
+  const { getTotalQuantity } = useContext(cartContext);
   const handleLogOut = () => {
     localStorage.removeItem("user");
-
-    Swal.fire("log out", "log out is true", "success").then(() => {
+    setTimeout(() => {
       navigate("/");
-    });
+    }, 500);
   };
+  useEffect(() => {
+    const checkUserData = () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        dispatch(getprofile(user.token));
+      }
+    };
+    window.addEventListener("storage", checkUserData);
+    return () => {
+      window.removeEventListener("storage", checkUserData);
+    };
+  }, []);
 
   return (
     <div className="navbar bg-base-100 w-full px-10 border-b-2 border-black justify-between">
@@ -53,7 +54,7 @@ const Header = () => {
                 />
               </svg>
               <span className="badge badge-lg indicator-item bg-color border-none">
-                {lengthOfItems}
+                {getTotalQuantity() / 2}
               </span>
             </div>
           </label>

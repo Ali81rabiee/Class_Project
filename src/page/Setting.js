@@ -3,9 +3,9 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const Setting = () => {
   return (
-    <div className="min-h-screen">
-      <div className="navbar mt-24 flex justify-center">
-        <div className="navbar-center glass flex justify-around">
+    <>
+      <div className="mt-28 flex justify-center">
+        <div className="glass flex justify-around">
           <div className="p-5">
             <NavLink
               to="change-profile"
@@ -37,7 +37,7 @@ const Setting = () => {
         </div>
       </div>
       <Outlet />
-    </div>
+    </>
   );
 };
 

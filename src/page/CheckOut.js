@@ -9,11 +9,11 @@ const CheckOut = () => {
   const submit = useSelector((state) => state.submit);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userAddress = JSON.parse(localStorage.getItem("user address"));
+  const userAddress = JSON.parse(localStorage.getItem("user address" || "[]"));
   const userOrders = JSON.parse(localStorage.getItem("cart"));
   const TotalPrice = JSON.parse(localStorage.getItem("allTotalPrice"));
   const user = JSON.parse(localStorage.getItem("user"));
-
+  // console.log(userAddress);
   const submitHandlle = () => {
     dispatch(
       getSubmit(
@@ -44,7 +44,7 @@ const CheckOut = () => {
         <p className="text-3xl text-red-700">{submit.error.message}</p>
       ) : submit.data.orderItems ? (
         showAlert()
-      ) : (
+      ) : userAddress && userOrders.length > 0 ? (
         <>
           <div className="hero-content flex-col glass mt-20 py-10">
             <div className="flex lg:flex-row flex-col justify-between w-full">
@@ -110,6 +110,24 @@ const CheckOut = () => {
             submit
           </button>
         </>
+      ) : (
+        <div className="font-bold my-auto text-color text-center p-32">
+          <div className="badge badge-warning gap-2 p-6 ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            Your Cart Is Empty or Your Addrress is nothing
+          </div>
+        </div>
       )}
     </div>
   );

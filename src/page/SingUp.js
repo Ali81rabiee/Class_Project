@@ -49,7 +49,7 @@ const SingUp = () => {
           setPassword={setPassword}
           setConfirm_password={setConfirm_password}
         />
-      ) : data.success ? (
+      ) : data.message === "user was created" ? (
         showAlert()
       ) : (
         <SingUpComponent

@@ -41,14 +41,14 @@ const ChangeProfile = () => {
   };
 
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse mt-40 mb-20">
+    <div className="hero">
+      <div className="hero-content flex-col lg:flex-row-reverse mt-10 mb-20">
         {changeProfile.loading ? (
           <Loading />
         ) : changeProfile.error ? (
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
             <div className="badge-lg badge-error gap-2 h-5">
-              {changeProfile.error.message}
+              {changeProfile.error.response.data.message}
             </div>{" "}
             <div className="card-body">
               <div className="form-control">

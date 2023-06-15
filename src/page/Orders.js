@@ -8,6 +8,7 @@ const Orders = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const { data, error, loading } = useSelector((state) => state.order);
+  console.log(error);
   useEffect(() => {
     dispatch(getOrder(user.token));
   }, []);
@@ -17,7 +18,11 @@ const Orders = () => {
       {loading ? (
         <Loading />
       ) : error ? (
-        <p className="mt-40">error</p>
+        <div className="flex flex-col items-center justify-center h-96">
+          <h2 className="font-bold text-5xl text-red-700">
+            {error.response.data.message}
+          </h2>
+        </div>
       ) : (
         Object.values(data)?.map((item, index) => (
           <div

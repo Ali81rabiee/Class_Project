@@ -24,7 +24,7 @@ const ChangeAvatar = () => {
     );
   };
   return (
-    <div className="hero min-h-screen">
+    <div className="hero mt-10">
       <div className="hero-content flex-col lg:flex-row-reverse">
         {uploadAvatar.loading ? (
           <Loading />
@@ -33,7 +33,7 @@ const ChangeAvatar = () => {
         ) : uploadAvatar.error ? (
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
             <div className="badge-lg badge-error gap-2 h-5">
-              {uploadAvatar.error.message}
+              {uploadAvatar.error.response.data.message}
             </div>
             <div className="card-body">
               <div className="form-control">
