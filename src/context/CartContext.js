@@ -6,7 +6,15 @@ const CartProvider = ({ children }) => {
   const [items, setItems] = useState(cartLocalStorage);
 
   useEffect(() => {
+    const getItems = () => {
+      const cartLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+      setItems(cartLocalStorage);
+    };
     localStorage.setItem("cart", JSON.stringify(items));
+    window.addEventListener("storage", getItems);
+    return () => {
+      window.removeEventListener("storage", getItems);
+    };
   }, [items]);
 
   const addItem = (product) => {

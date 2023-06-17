@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const CartItems = ({ product, quantity, removeItem, addItem }) => {
+const CartItems = ({ product, quantity, removeItem, addItem, items }) => {
+  useEffect(() => {
+    const storageHandeler = () => {
+      console.log(items);
+      return items;
+    };
+    window.addEventListener("storage", storageHandeler);
+
+    return () => {
+      window.removeEventListener("storage", storageHandeler);
+    };
+  }, []);
+
   return (
     <div className="mt-5 grid grid-cols-4 justify-items-center content-center ml-auto px-1 py-5 rounded-2xl glass">
       <div className="h-40">

@@ -11,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const profile = useSelector((state) => state.profile);
   const user = JSON.parse(localStorage.getItem("user"));
+  const cart = JSON.parse(localStorage.getItem("cart"));
   const { getTotalQuantity } = useContext(cartContext);
   const handleLogOut = () => {
     localStorage.removeItem("user");
@@ -26,6 +27,7 @@ const Header = () => {
       }
     };
     window.addEventListener("storage", checkUserData);
+
     return () => {
       window.removeEventListener("storage", checkUserData);
     };
@@ -54,7 +56,7 @@ const Header = () => {
                 />
               </svg>
               <span className="badge badge-lg indicator-item bg-color border-none">
-                {getTotalQuantity() / 2}
+                {cart ? getTotalQuantity() / 2 : 0}
               </span>
             </div>
           </label>

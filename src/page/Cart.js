@@ -13,11 +13,19 @@ const Cart = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (user) {
-      dispatch(getprofile(user.token));
-    } else {
-      return;
-    }
+    const getItems = () => {
+      if (user) {
+        dispatch(getprofile(user.token));
+      } else {
+        return;
+      }
+      console.log(items);
+      return items;
+    };
+    window.addEventListener("storage", getItems);
+    return () => {
+      window.removeEventListener("storage", getItems);
+    };
   }, []);
   return (
     <div className="container pb-10 px-3">
@@ -35,6 +43,7 @@ const Cart = () => {
               {...item}
               addItem={addItem}
               removeItem={removeItem}
+              items={items}
             />
           ))}
         </>
