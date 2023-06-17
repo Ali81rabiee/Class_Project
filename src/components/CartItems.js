@@ -22,7 +22,7 @@ const CartItems = ({ product, quantity, removeItem, addItem, items }) => {
         <h1 className="text-center ml-2">{product.name}</h1>
       </div>
       <div className="my-auto">
-        <p className="font-bold mr-5">{`${product.price}$`}</p>
+        <p className="font-bold mr-5">{`${product.price} $`}</p>
       </div>
 
       <div className="flex w-100 mr-5">
